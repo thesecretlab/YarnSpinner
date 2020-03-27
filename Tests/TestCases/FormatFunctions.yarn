@@ -37,6 +37,14 @@ Ordinal: [ordinal {$ord} one="one" two="two" few="few" many="many" other="other"
 <<set $ord to 4>>
 Ordinal: [ordinal {$ord} one="one" two="two" few="few" many="many" other="other"]
 
+// Multiple lines (newlines inside the format function are ignored)
+Multiple lines: [ordinal {$ord} 
+    one="one" 
+    two="two" 
+    few="few" 
+    many="many" 
+    other="other"] wow
+
 <<set $gender to "other">>
 <<set $num to 1>>
 <<set $ord to 1>>

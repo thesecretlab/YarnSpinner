@@ -271,6 +271,9 @@ HASHTAG_TEXT: ~[ \t\r\n#$<]+ -> popMode;
 mode FormatFunctionMode;
 FORMAT_FUNCTION_WS : WS -> skip;
 
+// Ignore newlines inside format functions
+FORMAT_FUNCTION_NEWLINE : NEWLINE -> skip;
+
 FORMAT_FUNCTION_ID: ID;
 
 FORMAT_FUNCTION_NUMBER: NUMBER;
