@@ -577,6 +577,62 @@ namespace Yarn {
         }
 
         /// <summary>
+        /// Is the State ready to be saved?
+        /// </summary>
+        public bool TryGetState() {
+            return vm.TryGetState();
+        }
+
+        /// <summary>
+        /// Get current State of Virtual Machine as a copy of the State object.
+        /// </summary>
+        public State GetStateClone() {
+            return vm.GetStateClone();
+        }
+
+        /// <summary>
+        /// Get current State of Virtual Machine as serialized Binary.
+        /// </summary>
+        public BinarySerializedState GetStateBinarySerialized() {
+            return vm.GetStateBinarySerialized();
+        }
+
+        /// <summary>
+        /// Get current State of Virtual Machine as serialized JSON.
+        /// </summary>
+        public JsonSerializedState GetStateJsonSerialized() {
+            return vm.GetStateJsonSerialized();
+        }
+
+        /// <summary>
+        /// Is the State ready to be set into VirtualMachine?
+        /// </summary>
+        public bool TrySetState(State newState) {
+            return vm.TrySetState(newState);
+        }
+
+        /// <summary>
+        /// Is the State ready to be set into VirtualMachine?
+        /// </summary>
+        public bool TrySetState(ISerializedState serialized) {
+            return vm.TrySetState(serialized);
+        }
+
+        /// <summary>
+        /// Set Virtual Machine state from a State object.
+        /// </summary>
+        public void SetState(State newState) {
+            vm.SetState(newState);
+        }
+
+        /// <summary>
+        /// Set Virtual Machine state from a serialized State.
+        /// </summary>
+        public void SetState(ISerializedState serialized) {
+            vm.SetState(serialized);
+        }
+
+        /// <summary>
         /// Prepares the <see cref="Dialogue"/> that the user intends to start running a node.
         /// </summary>
         /// <param name="startNode">The name of the node that will be run. The node have been loaded by calling <see cref="SetProgram(Program)"/> or <see cref="AddProgram(Program)"/>.</param>

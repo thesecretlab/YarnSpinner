@@ -251,6 +251,41 @@ namespace Yarn.Unity
         }
 
         /// <summary>
+        /// Start the dialogue from saved State
+        /// </summary>
+        public void StartDialogue(State state)
+        {
+            if (string.IsNullOrEmpty(state.CurrentNodeName)) {
+                Debug.LogError("Cannot start dialogue from a VM State because it doesn't have currentNode set.");
+                return;
+            }
+
+            dialogue.SetState(state);
+
+            // Stop any processes that might be running already
+            dialogueUI.StopAllCoroutines();
+
+            // Get it going, this bit is same as in RunDialogue, but without setting the node.
+            // Doing so would trigger ResetState() inside VirtualMachine and clear our desired VMState.
+
+            // Mark that we're in conversation.
+            isDialogueRunning = true;
+
+            // Signal that we're starting up.
+            this.dialogueUI.DialogueStarted();
+
+            ContinueDialogue();
+        }
+
+        /// <summary>
+        /// Start the dialogue from saved Serialized State
+        /// </summary>
+        public void StartDialogue(ISerializedState state)
+        {
+            StartDialogue(state.Deserialize());
+        }
+
+        /// <summary>
         /// Resets the <see cref="variableStorage"/>, and starts running the dialogue again from the node named <see cref="startNode"/>.
         /// </summary>        
         public void ResetDialogue()
@@ -521,7 +556,7 @@ namespace Yarn.Unity
 
                 Dialogue.SetProgram(combinedProgram);
             }
-
+            
             if (startAutomatically) {
                 StartDialogue();
             }
